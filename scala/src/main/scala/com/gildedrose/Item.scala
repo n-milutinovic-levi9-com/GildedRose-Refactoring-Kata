@@ -2,7 +2,9 @@ package com.gildedrose
 
 case class Item(name: String, var sellIn: Int, var quality: Int) {
   def updateItem(): Unit = {
-    if (!name.equals(ItemName.BRIE) && !name.equals(ItemName.BACKSTAGE)) {
+    val isAgedBrie = name.equals(ItemName.BRIE)
+
+    if (!isAgedBrie && !name.equals(ItemName.BACKSTAGE)) {
       if (quality > 0) {
         if (!name.equals(ItemName.SULFURAS)) {
           quality = quality - 1
@@ -33,7 +35,7 @@ case class Item(name: String, var sellIn: Int, var quality: Int) {
     }
 
     if (sellIn < 0) {
-      if (!name.equals(ItemName.BRIE)) {
+      if (!isAgedBrie) {
         if (!name.equals(ItemName.BACKSTAGE)) {
           if (quality > 0) {
             if (!name.equals(ItemName.SULFURAS)) {
