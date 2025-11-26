@@ -4,7 +4,7 @@ class GildedRose(val items: Array[Item]) {
 
 
   def updateQuality() : Unit = {
-    for (i <- 0 until items.length) {
+    for (i <- items.indices) {
       if (!items(i).name.equals("Aged Brie")
         && !items(i).name.equals("Backstage passes to a TAFKAL80ETC concert")) {
         if (items(i).quality > 0) {
