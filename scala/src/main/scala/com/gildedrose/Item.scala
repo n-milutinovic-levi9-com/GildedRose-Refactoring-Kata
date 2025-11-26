@@ -17,13 +17,7 @@ case class Item(name: String, var sellIn: Int, var quality: Int) {
         }
       }
     } else {
-      if (!isBackstagePass) {
-        if (quality > 0) {
-          if (!name.equals(ItemName.SULFURAS)) {
-            quality = quality - 1
-          }
-        }
-      } else {
+      if (isBackstagePass) {
         if (quality < 50) {
           quality = quality + 1
 
@@ -39,23 +33,35 @@ case class Item(name: String, var sellIn: Int, var quality: Int) {
             }
           }
         }
-      }
 
-      if (!name.equals(ItemName.SULFURAS)) {
-        sellIn = sellIn - 1
-      }
+        if (!name.equals(ItemName.SULFURAS)) {
+          sellIn = sellIn - 1
+        }
 
-      if (sellIn < 0) {
-        if (!isBackstagePass) {
+        if (sellIn < 0) {
+          quality = quality - quality
+        }
+
+      } else {
+        if (quality > 0) {
+          if (!name.equals(ItemName.SULFURAS)) {
+            quality = quality - 1
+          }
+        }
+
+        if (!name.equals(ItemName.SULFURAS)) {
+          sellIn = sellIn - 1
+        }
+
+        if (sellIn < 0) {
           if (quality > 0) {
             if (!name.equals(ItemName.SULFURAS)) {
               quality = quality - 1
             }
           }
-        } else {
-          quality = quality - quality
         }
       }
     }
   }
+
 }
