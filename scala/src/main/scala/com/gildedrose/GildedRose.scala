@@ -11,8 +11,7 @@ class GildedRose(val items: Array[Item]) {
 
   def updateQuality() : Unit = {
     for (item <- items) {
-      if (!item.name.equals(ItemName.BRIE)
-        && !item.name.equals(ItemName.BACKSTAGE)) {
+      if (!item.name.equals(ItemName.BRIE) && !item.name.equals(ItemName.BACKSTAGE)) {
         if (item.quality > 0) {
           if (!item.name.equals(ItemName.SULFURAS)) {
             item.quality = item.quality - 1
