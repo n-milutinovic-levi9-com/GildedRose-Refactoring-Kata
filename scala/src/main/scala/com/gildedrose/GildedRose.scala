@@ -13,7 +13,11 @@ class GildedRose(val items: Array[Item]) {
     val processor = ItemProcessor()
     for (item <- items) {
       //item.updateItem()
-      processor.updateItem(item)
+      //processor.updateItem(item)
+      val internal = InternalItem(item)
+      val updated = internal.update()
+      item.quality = updated.quality
+      item.sellIn = updated.sellIn
     }
   }
 }
