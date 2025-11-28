@@ -77,7 +77,7 @@ object BackstagePass {
   /** Days to the concert when this pass becomes more interesting. */
   val FIRST_CALL_SELL_IN = 11
   /** Days to the concert when this pass becomes fascinating. */
-  val LAS_CALL_SELL_IN = 6
+  val LAST_CALL_SELL_IN = 6
 }
 
 /** Backstage pass - closer to the concert, the more valuable it is.
@@ -100,7 +100,7 @@ class BackstagePass(sellIn: Int, quality: Int) extends InternalItem(InternalItem
         }
       }
 
-      if (newSellIn < BackstagePass.LAS_CALL_SELL_IN) {
+      if (newSellIn < BackstagePass.LAST_CALL_SELL_IN) {
         if (newQuality < InternalItem.MAX_QUALITY) {
           newQuality = newQuality + 1
         }
