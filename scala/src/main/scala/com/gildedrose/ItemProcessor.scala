@@ -6,9 +6,9 @@ package com.gildedrose
  */
 class ItemProcessor {
   def updateItem(item: Item): Unit = {
-    val isAgedBrie = item.name.equals(ItemName.BRIE)
-    val isBackstagePass = item.name.equals(ItemName.BACKSTAGE)
-    val isSulfuras = item.name.equals(ItemName.SULFURAS)
+    val isAgedBrie = item.name.equals(InternalItem.ItemName.BRIE)
+    val isBackstagePass = item.name.equals(InternalItem.ItemName.BACKSTAGE)
+    val isSulfuras = item.name.equals(InternalItem.ItemName.SULFURAS)
 
     if (isAgedBrie) {
       updateAgedBrie(item)
