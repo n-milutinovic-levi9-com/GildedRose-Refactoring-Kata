@@ -10,8 +10,10 @@ class GildedRose(val items: Array[Item]) {
 
 
   def updateQuality() : Unit = {
+    val processor = ItemProcessor()
     for (item <- items) {
-      item.updateItem()
+      //item.updateItem()
+      processor.updateItem(item)
     }
   }
 }
