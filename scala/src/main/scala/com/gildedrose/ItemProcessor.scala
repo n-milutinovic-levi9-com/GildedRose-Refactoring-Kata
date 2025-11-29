@@ -4,6 +4,7 @@ package com.gildedrose
  *
  * This class embodies the logic extracted from the `GildedRose`.
  */
+@Deprecated(forRemoval = true)
 class ItemProcessor {
   def updateItem(item: Item): Unit = {
     val isAgedBrie = item.name.equals(InternalItem.ItemName.BRIE)
