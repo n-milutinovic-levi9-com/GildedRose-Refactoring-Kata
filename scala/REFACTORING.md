@@ -24,3 +24,17 @@ semi-mutable (name is immutable), this choice makes sense.
 With proper encapsulation and polymorphism we can introduce immutability and have a
 proper code decomposition. The drawback is that we have to convert to and from the
 public API, but that seems OK.
+
+## Internal Items classes
+
+I have decided to use a class hierarchy of `InternalItems`. Item processors would
+provide similar taxonomy, but with so many `item.xxx` prefixes.
+
+After modelling the `InternalItem`, added unit tests for each type.
+
+## Extensibility: register converters
+
+In order to aid clients of this component to use it, we will introduce a converter
+registry. It will hold tuples of (matcher, converter), where the matcher is a predicate
+matching on item's name and converter is a function converting (DTO) Item to Internal
+Item.
