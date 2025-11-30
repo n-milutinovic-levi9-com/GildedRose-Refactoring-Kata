@@ -17,6 +17,17 @@ object ConverterRegistry {
   default.register(_ == ItemName.SULFURAS, (item: Item) => Sulfuras(item.sellIn, item.quality))
 }
 
+/** Converter registry for Item -> InternalItem
+ *
+ * Clients of this class can submit a public DTO Item to be converted into the `InternalItem`.
+ * The registry holds any number of converters from `Item` to `InternalItem`. The appropriate
+ * converter is chosen using a matcher supplied when the converter is registered. The matcher
+ * is matching on item name.
+ *
+ * If no match can be made, the default converter is used.
+ *
+ * @param defaultConverter converter to be used when no matchers apply to the given name.
+ */
 class ConverterRegistry(private val defaultConverter: ConverterRegistry.Converter) {
   private var registry = Set.empty[(ConverterRegistry.Matcher, ConverterRegistry.Converter)]
   private val defaultEntry = ((_: String) => true, defaultConverter)

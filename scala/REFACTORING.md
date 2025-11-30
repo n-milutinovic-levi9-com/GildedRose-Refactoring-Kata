@@ -38,3 +38,7 @@ In order to aid clients of this component to use it, we will introduce a convert
 registry. It will hold tuples of (matcher, converter), where the matcher is a predicate
 matching on item's name and converter is a function converting (DTO) Item to Internal
 Item.
+
+A client of the system will be able to register and unregister their custom converters.
+Those converters, just like matchers, can utilize RegEx to accept additional parameters
+in the name.
