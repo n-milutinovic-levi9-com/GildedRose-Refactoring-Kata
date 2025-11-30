@@ -53,8 +53,7 @@ abstract case class InternalItem(name: String, sellIn: Int, quality: Int) {
  * @param quality perceived quality of an item.
  */
 class AgedBrie(sellIn: Int, quality: Int) extends InternalItem(InternalItem.ItemName.BRIE, sellIn, quality) {
-  @Override
-  def update(): InternalItem = {
+  override def update(): InternalItem = {
     var newQuality = quality
     var newSellIn = sellIn
 
@@ -86,8 +85,7 @@ object BackstagePass {
  * @param quality perceived quality of an item.
  */
 class BackstagePass(sellIn: Int, quality: Int) extends InternalItem(InternalItem.ItemName.BACKSTAGE, sellIn, quality) {
-  @Override
-  def update(): InternalItem = {
+  override def update(): InternalItem = {
     var newQuality = quality
     var newSellIn = sellIn
 
@@ -121,7 +119,6 @@ class BackstagePass(sellIn: Int, quality: Int) extends InternalItem(InternalItem
  * @param quality perceived quality of an item.
  */
 class Sulfuras(sellIn: Int, quality: Int) extends InternalItem(InternalItem.ItemName.SULFURAS, sellIn, quality) {
-  @Override
   override def update(): InternalItem = this
 }
 
