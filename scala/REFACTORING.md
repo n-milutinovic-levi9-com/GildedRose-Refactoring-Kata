@@ -42,3 +42,8 @@ Item.
 A client of the system will be able to register and unregister their custom converters.
 Those converters, just like matchers, can utilize RegEx to accept additional parameters
 in the name.
+
+### Full extensibility
+
+Looks like we need to be able to unregister a converter. That will require some changes
+under the hood. The public API of the `ConverterRegistry` will remain the same.
