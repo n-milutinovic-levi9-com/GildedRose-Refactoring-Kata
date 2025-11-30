@@ -1,6 +1,7 @@
 package com.gildedrose.registry
 
-import com.gildedrose.{InternalItem, Item}
+import com.gildedrose.InternalItem.ItemName
+import com.gildedrose.{AgedBrie, BackstagePass, InternalItem, Item, MiscellaneousItem, Sulfuras}
 
 import scala.collection.mutable.Seq
 
@@ -9,6 +10,11 @@ object ConverterRegistry {
   type Matcher = String => Boolean
   /** Function used to convert `Item` to `InternalItem` */
   type Converter = Item => InternalItem
+
+  val default = ConverterRegistry((item: Item) => MiscellaneousItem(item.name, item.sellIn, item.quality))
+  default.register(_ == ItemName.BRIE, (item: Item) => AgedBrie(item.sellIn, item.quality))
+  default.register(_ == ItemName.BACKSTAGE, (item: Item) => BackstagePass(item.sellIn, item.quality))
+  default.register(_ == ItemName.SULFURAS, (item: Item) => Sulfuras(item.sellIn, item.quality))
 }
 
 class ConverterRegistry(private val defaultConverter: ConverterRegistry.Converter) {
