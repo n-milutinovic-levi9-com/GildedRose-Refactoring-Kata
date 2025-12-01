@@ -37,13 +37,17 @@ object InternalItem {
   val MAX_QUALITY = 50
 }
 
-/** Base for all items.
+/** Base class for all internal items.
+ *
+ * This case class mirrors the external (DTO) item. It has the same properties as DTO
+ * item. Those properties will be copied when the item is exported.
  *
  * @param name item name, can be used as a discriminator.
  * @param sellIn how many days from now this item should be sold or is valid.
  * @param quality perceived quality of an item.
  */
 abstract case class InternalItem(name: String, sellIn: Int, quality: Int) {
+  /** Update item properties after a day */
   def update(): InternalItem
 }
 
@@ -119,6 +123,10 @@ class BackstagePass(sellIn: Int, quality: Int) extends InternalItem(InternalItem
  * @param quality perceived quality of an item.
  */
 class Sulfuras(sellIn: Int, quality: Int) extends InternalItem(InternalItem.ItemName.SULFURAS, sellIn, quality) {
+  /** Sulfuras doesn't change over time.
+   *
+   * @return same unchanged instance.
+   */
   override def update(): InternalItem = this
 }
 
