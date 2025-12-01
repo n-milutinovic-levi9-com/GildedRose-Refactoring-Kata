@@ -4,6 +4,7 @@ import com.gildedrose.{InternalItem, Item, MiscellaneousItem}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.BeforeAndAfter
+import scala.compiletime.uninitialized
 
 class UnregisterConverterRegistryTest extends AnyFlatSpec with Matchers with BeforeAndAfter {
   private val testName = "Test Item"
@@ -14,7 +15,7 @@ class UnregisterConverterRegistryTest extends AnyFlatSpec with Matchers with Bef
     override def update(): InternalItem = this
   }
 
-  private var registry: ConverterRegistry = _
+  private var registry: ConverterRegistry = uninitialized
   private val matcher = (name: String) => name == testName
   private val item = Item(testName, testSellIn, testQuality)
 
