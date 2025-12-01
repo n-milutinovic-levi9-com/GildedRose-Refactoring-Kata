@@ -12,10 +12,10 @@ object ConverterRegistry {
   type Converter = Item => InternalItem
 
   /** The default converter registry, holding all known types of items. */
-  val default = ConverterRegistry((item: Item) => MiscellaneousItem(item.name, item.sellIn, item.quality))
-  default.register(_ == ItemName.BRIE, (item: Item) => AgedBrie(item.sellIn, item.quality))
-  default.register(_ == ItemName.BACKSTAGE, (item: Item) => BackstagePass(item.sellIn, item.quality))
-  default.register(_ == ItemName.SULFURAS, (item: Item) => Sulfuras(item.sellIn, item.quality))
+  val default: ConverterRegistry = ConverterRegistry((item: Item) => MiscellaneousItem(item.name, item.sellIn, item.quality))
+    .register(_ == ItemName.BRIE, (item: Item) => AgedBrie(item.sellIn, item.quality))
+    .register(_ == ItemName.BACKSTAGE, (item: Item) => BackstagePass(item.sellIn, item.quality))
+    .register(_ == ItemName.SULFURAS, (item: Item) => Sulfuras(item.sellIn, item.quality))
 }
 
 /** Converter registry for Item -> InternalItem
@@ -33,7 +33,6 @@ object ConverterRegistry {
  * @param defaultConverter converter to be used when no matchers apply to the given name.
  */
 class ConverterRegistry(private val defaultConverter: ConverterRegistry.Converter) {
-  private var _registry = Set.empty[(ConverterRegistry.Matcher, ConverterRegistry.Converter)]
   private var registry = Map.empty[ConverterRegistry.Matcher, ConverterRegistry.Converter]
   private val defaultEntry = ((_: String) => true, defaultConverter)
 
@@ -46,8 +45,9 @@ class ConverterRegistry(private val defaultConverter: ConverterRegistry.Converte
    * @param matcher matcher for the converter.
    * @param converter converter Item -> InternalItem.
    */
-  def register(matcher: ConverterRegistry.Matcher, converter: ConverterRegistry.Converter): Unit = {
+  def register(matcher: ConverterRegistry.Matcher, converter: ConverterRegistry.Converter): ConverterRegistry = {
     registry = registry + (matcher -> converter)
+    this
   }
 
   /** Unregister a converter.
@@ -57,8 +57,9 @@ class ConverterRegistry(private val defaultConverter: ConverterRegistry.Converte
    *
    * @param matcher matcher that is a key to the converter.
    */
-  def unregister(matcher: ConverterRegistry.Matcher): Unit = {
+  def unregister(matcher: ConverterRegistry.Matcher): ConverterRegistry = {
     registry = registry - matcher
+    this
   }
 
   /** Unregister converter(s) matching a given name.
@@ -68,8 +69,9 @@ class ConverterRegistry(private val defaultConverter: ConverterRegistry.Converte
    *
    * @param name item name used to filter out converter(s).
    */
-  def unregister(name: String): Unit = {
+  def unregister(name: String): ConverterRegistry = {
     registry = registry.view.filterKeys(! _.apply(name)).toMap
+    this
   }
 
   /** Convert DTO Item to internal form.
