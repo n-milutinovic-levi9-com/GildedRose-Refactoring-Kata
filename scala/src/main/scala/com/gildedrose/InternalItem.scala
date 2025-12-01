@@ -12,27 +12,6 @@ object InternalItem {
     val SULFURAS = "Sulfuras, Hand of Ragnaros"
   }
 
-  /** Convert Item DTO to the internal representation.
-   *
-   * @param item
-   * @return
-   */
-  def apply(item: Item): InternalItem = {
-    item match {
-      case Item(ItemName.BRIE, sellIn, quality) => new AgedBrie(sellIn, quality)
-      case Item(ItemName.BACKSTAGE, sellIn, quality) => new BackstagePass(sellIn, quality)
-      case Item(ItemName.SULFURAS, sellIn, quality) => new Sulfuras(sellIn, quality)
-      case Item(name, sellIn, quality) => new MiscellaneousItem(name, sellIn, quality)
-    }
-  }
-
-  /** Convert internal item to DTO form.
-   *
-   * @param internal internal item to be exported.
-   * @return (external) DTO item.
-   */
-  def exportItem(internal: InternalItem): Item = Item(internal.name, internal.sellIn, internal.quality)
-
   /** Maximum quality some items can reach */
   val MAX_QUALITY = 50
 }
