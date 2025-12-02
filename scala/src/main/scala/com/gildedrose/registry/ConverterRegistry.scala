@@ -13,10 +13,10 @@ object ConverterRegistry {
   type Converter = Item => InternalItem
 
   /** The default converter registry, holding all known types of items. */
-  val default: ConverterRegistry = ConverterRegistry((item: Item) => MiscellaneousItem(item.name, item.sellIn, item.quality))
-    .register(_ == AgedBrie.NAME, (item: Item) => AgedBrie(item.sellIn, item.quality))
-    .register(_ == BackstagePass.NAME, (item: Item) => BackstagePass(item.sellIn, item.quality))
-    .register(_ == Sulfuras.NAME, (item: Item) => Sulfuras(item.sellIn, item.quality))
+  val default: ConverterRegistry = ConverterRegistry(MiscellaneousItem.CONVERTER)
+    .register(AgedBrie.MATCHER, AgedBrie.CONVERTER)
+    .register(BackstagePass.MATCHER, BackstagePass.CONVERTER)
+    .register(Sulfuras.MATCHER, Sulfuras.CONVERTER)
 }
 
 /** Converter registry for Item -> InternalItem
@@ -35,7 +35,6 @@ object ConverterRegistry {
  */
 class ConverterRegistry(private val defaultConverter: ConverterRegistry.Converter) {
   private var registry = Map.empty[ConverterRegistry.Matcher, ConverterRegistry.Converter]
-  private val defaultEntry = ((_: String) => true, defaultConverter)
 
   /** Register a converter with a matcher.
    *
