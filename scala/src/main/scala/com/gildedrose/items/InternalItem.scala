@@ -16,16 +16,6 @@ abstract case class InternalItem(name: String, sellIn: Int, quality: Int) {
 
 /** Utility object for converting Items to and from internal form. */
 object InternalItem {
-  /** Known item names */
-  object ItemName {
-    /** Aged Brie - gets better with time */
-    val BRIE = "Aged Brie"
-    /** Backstage pass - gets more valuable as the concert draws near */
-    val BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert"
-    /** Sulfuras - doesn't change, no matter how much time passes. */
-    val SULFURAS = "Sulfuras, Hand of Ragnaros"
-  }
-
   /** Maximum quality some items can reach */
   val MAX_QUALITY = 50
 }

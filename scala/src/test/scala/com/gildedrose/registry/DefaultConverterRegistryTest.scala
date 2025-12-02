@@ -1,7 +1,6 @@
 package com.gildedrose.registry
 
 import com.gildedrose.Item
-import com.gildedrose.items.InternalItem.ItemName
 import com.gildedrose.items.{AgedBrie, BackstagePass, InternalItem, Sulfuras, MiscellaneousItem}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
@@ -11,31 +10,31 @@ class DefaultConverterRegistryTest extends AnyFlatSpec with Matchers {
   private val quality = 30
 
   "Default converter registry" should "have Aged Brie converter" in {
-    val item = Item(ItemName.BRIE, sellIn, quality)
+    val item = Item(AgedBrie.NAME, sellIn, quality)
     val result = ConverterRegistry.default.convert(item)
 
     result shouldBe an [AgedBrie]
-    result.name should be (ItemName.BRIE)
+    result.name should be (AgedBrie.NAME)
     result.sellIn should be (sellIn)
     result.quality should be (quality)
   }
 
   it should "have Backstage Pass converter" in {
-    val item = Item(ItemName.BACKSTAGE, sellIn, quality)
+    val item = Item(BackstagePass.NAME, sellIn, quality)
     val converted = ConverterRegistry.default.convert(item)
 
     converted shouldBe a [BackstagePass]
-    converted.name should be (ItemName.BACKSTAGE)
+    converted.name should be (BackstagePass.NAME)
     converted.sellIn should be (sellIn)
     converted.quality should be (quality)
   }
 
   it should "have Sulfuras converter" in {
-    val item = Item(ItemName.SULFURAS, sellIn, quality)
+    val item = Item(Sulfuras.NAME, sellIn, quality)
     val converted = ConverterRegistry.default.convert(item)
 
     converted shouldBe a [Sulfuras]
-    converted.name should be (ItemName.SULFURAS)
+    converted.name should be (Sulfuras.NAME)
     converted.sellIn should be (sellIn)
     converted.quality should be (quality)
   }

@@ -1,6 +1,5 @@
 package com.gildedrose.registry
 
-import com.gildedrose.items.InternalItem.ItemName
 import com.gildedrose.items.{AgedBrie, BackstagePass, InternalItem, Sulfuras}
 import com.gildedrose.Item
 import com.gildedrose.items.MiscellaneousItem
@@ -15,9 +14,9 @@ object ConverterRegistry {
 
   /** The default converter registry, holding all known types of items. */
   val default: ConverterRegistry = ConverterRegistry((item: Item) => MiscellaneousItem(item.name, item.sellIn, item.quality))
-    .register(_ == ItemName.BRIE, (item: Item) => AgedBrie(item.sellIn, item.quality))
-    .register(_ == ItemName.BACKSTAGE, (item: Item) => BackstagePass(item.sellIn, item.quality))
-    .register(_ == ItemName.SULFURAS, (item: Item) => Sulfuras(item.sellIn, item.quality))
+    .register(_ == AgedBrie.NAME, (item: Item) => AgedBrie(item.sellIn, item.quality))
+    .register(_ == BackstagePass.NAME, (item: Item) => BackstagePass(item.sellIn, item.quality))
+    .register(_ == Sulfuras.NAME, (item: Item) => Sulfuras(item.sellIn, item.quality))
 }
 
 /** Converter registry for Item -> InternalItem

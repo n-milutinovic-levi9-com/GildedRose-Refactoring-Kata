@@ -1,5 +1,16 @@
 package com.gildedrose.items
 
+import com.gildedrose.Item
+
+object MiscellaneousItem {
+  import com.gildedrose.registry.ConverterRegistry.{Converter, Matcher}
+
+  /** Mather matching everything */
+  val MATCHER: Matcher = (name: String) => true
+  /** Converter */
+  val CONVERTER: Converter = (item: Item) => MiscellaneousItem(item.name, item.sellIn, item.quality)
+}
+
 /** All other items.
  *
  * The quality of these items drops daily till it reaches 0.

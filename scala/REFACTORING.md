@@ -47,3 +47,13 @@ in the name.
 
 Looks like we need to be able to unregister a converter. That will require some changes
 under the hood. The public API of the `ConverterRegistry` will remain the same.
+
+## Split up internal item files
+
+We really should keep classes in different files, with their companion objects.
+
+## Group internal item components
+
+Components of internal items are scattered across the code-base. Matchers and converters
+are with the registry, names are in `ItemNames`. We should group that together.
+
