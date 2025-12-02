@@ -20,23 +20,17 @@ object MiscellaneousItem {
  * @param quality perceived quality of an item.
  */
 class MiscellaneousItem(name: String, sellIn: Int, quality: Int) extends InternalItem[MiscellaneousItem](name, sellIn, quality) {
-  override def update(): MiscellaneousItem = {
-    var newQuality = quality
-    var newSellIn = sellIn
-
-    if (newQuality > 0) {
-      newQuality = newQuality - 1
+  private def ageItem(): MiscellaneousItem =
+    if (sellIn < 0) {
+      decreaseQuality()
+    } else {
+      this
     }
 
-    newSellIn = newSellIn - 1
-
-    if (newSellIn < 0) {
-      if (newQuality > 0) {
-        newQuality = newQuality - 1
-      }
-    }
-    MiscellaneousItem(name, newSellIn, newQuality)
-  }
+  override def update(): MiscellaneousItem = this
+    .decreaseQuality()
+    .decreaseSellIn()
+    .ageItem()
 
   override protected def build(newSellIn: Int, newQuality: Int): MiscellaneousItem = MiscellaneousItem(name, newSellIn, newQuality)
 }

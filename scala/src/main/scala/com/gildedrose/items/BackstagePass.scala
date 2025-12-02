@@ -23,32 +23,26 @@ object BackstagePass {
  * @param quality perceived quality of an item.
  */
 class BackstagePass(sellIn: Int, quality: Int) extends InternalItem[BackstagePass](BackstagePass.NAME, sellIn, quality) {
-  override def update(): BackstagePass = {
-    var newQuality = quality
-    var newSellIn = sellIn
+  private def updateFirstCall(): BackstagePass = if (sellIn < BackstagePass.FIRST_CALL_SELL_IN)
+      increaseQuality()
+    else
+      this
 
-    if (newQuality < InternalItem.MAX_QUALITY) {
-      newQuality = newQuality + 1
+  private def updateLastCall(): BackstagePass = if (sellIn < BackstagePass.LAST_CALL_SELL_IN)
+      increaseQuality()
+    else
+      this
 
-      if (newSellIn < BackstagePass.FIRST_CALL_SELL_IN) {
-        if (newQuality < InternalItem.MAX_QUALITY) {
-          newQuality = newQuality + 1
-        }
-      }
+  private def expirePass(): BackstagePass = if (sellIn < 0)
+    build(sellIn, 0)
+  else
+    this
 
-      if (newSellIn < BackstagePass.LAST_CALL_SELL_IN) {
-        if (newQuality < InternalItem.MAX_QUALITY) {
-          newQuality = newQuality + 1
-        }
-      }
-    }
-    newSellIn = newSellIn - 1
-
-    if (newSellIn < 0) {
-      newQuality = 0
-    }
-    BackstagePass(newSellIn, newQuality)
-  }
+  override def update(): BackstagePass = increaseQuality()
+      .updateFirstCall()
+      .updateLastCall()
+      .decreaseSellIn()
+      .expirePass()
 
   override protected def build(newSellIn: Int, newQuality: Int): BackstagePass = BackstagePass(newSellIn, newQuality)
 }

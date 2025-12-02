@@ -21,9 +21,31 @@ abstract case class InternalItem[T <: InternalItem[T]](name: String, sellIn: Int
    *
    * @param newSellIn new sell-in value.
    * @param newQuality new quality value.
-   * @return
+   * @return a new instance of concrete internal item.
    */
   protected def build(newSellIn: Int, newQuality: Int): T
+
+  /** Decrease sell-in days. */
+  protected def decreaseSellIn(): T = {
+    build(sellIn - 1, quality)
+  }
+
+  /** Increase quality, safely. */
+  protected def increaseQuality(): T = {
+    if (quality < InternalItem.MAX_QUALITY) {
+      build(sellIn, quality + 1)
+    } else {
+      build(sellIn, quality)
+    }
+  }
+
+  /** Decrease quality, safely. */
+  protected def decreaseQuality(): T = {
+    if quality > 0 then
+      build(sellIn, quality - 1)
+    else
+      build(sellIn, quality)
+  }
 }
 
 /** Utility object for converting Items to and from internal form. */

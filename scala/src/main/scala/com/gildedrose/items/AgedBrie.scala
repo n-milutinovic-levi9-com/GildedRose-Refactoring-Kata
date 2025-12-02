@@ -19,22 +19,18 @@ object AgedBrie {
  * @param quality perceived quality of an item.
  */
 class AgedBrie(sellIn: Int, quality: Int) extends InternalItem[AgedBrie](AgedBrie.NAME, sellIn, quality) {
-  override def update(): AgedBrie = {
-    var newQuality = quality
-    var newSellIn = sellIn
-
-    if (newQuality < InternalItem.MAX_QUALITY) {
-      newQuality = newQuality + 1
+  private def updateOveragedBrie(): AgedBrie = {
+    if (sellIn < 0) {
+      increaseQuality()
+    } else {
+      this
     }
-    newSellIn = newSellIn - 1
-
-    if (newSellIn < 0) {
-      if (newQuality < InternalItem.MAX_QUALITY) {
-        newQuality = newQuality + 1
-      }
-    }
-    AgedBrie(newSellIn, newQuality)
   }
+
+  override def update(): AgedBrie = this
+    .increaseQuality()
+    .decreaseSellIn()
+    .updateOveragedBrie()
 
   override protected def build(newSellIn: Int, newQuality: Int): AgedBrie = AgedBrie(newSellIn, newQuality)
 }
