@@ -1,7 +1,8 @@
 package com.gildedrose.registry
 
-import com.gildedrose.{AgedBrie, BackstagePass, InternalItem, Item, MiscellaneousItem, Sulfuras}
-import com.gildedrose.InternalItem.ItemName
+import com.gildedrose.Item
+import com.gildedrose.items.InternalItem.ItemName
+import com.gildedrose.items.{AgedBrie, BackstagePass, InternalItem, Sulfuras, MiscellaneousItem}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 

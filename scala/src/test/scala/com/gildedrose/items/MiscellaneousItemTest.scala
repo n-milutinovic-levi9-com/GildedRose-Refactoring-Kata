@@ -1,9 +1,9 @@
-package com.gildedrose.item
+package com.gildedrose.items
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
+import com.gildedrose.items.MiscellaneousItem
 
-import com.gildedrose.MiscellaneousItem
 class MiscellaneousItemTest extends AnyFlatSpec with Matchers {
   "Misc item" should "decrease sell-in on every update" in {
     for { sellIn <- List(20, 10, 4, 1, 0, -2) } {

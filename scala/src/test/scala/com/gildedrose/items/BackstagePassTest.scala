@@ -1,8 +1,8 @@
-package com.gildedrose.item
+package com.gildedrose.items
 
+import com.gildedrose.items.BackstagePass
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
-import com.gildedrose.BackstagePass
 
 /** Test Backstage pass. */
 class BackstagePassTest extends AnyFlatSpec with Matchers {

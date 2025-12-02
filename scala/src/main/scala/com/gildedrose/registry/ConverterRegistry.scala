@@ -1,7 +1,9 @@
 package com.gildedrose.registry
 
-import com.gildedrose.InternalItem.ItemName
-import com.gildedrose.{AgedBrie, BackstagePass, InternalItem, Item, MiscellaneousItem, Sulfuras}
+import com.gildedrose.items.InternalItem.ItemName
+import com.gildedrose.items.{AgedBrie, BackstagePass, InternalItem, Sulfuras}
+import com.gildedrose.Item
+import com.gildedrose.items.MiscellaneousItem
 
 import scala.collection.mutable.Seq
 

@@ -1,8 +1,8 @@
-package com.gildedrose.item
+package com.gildedrose.items
 
+import com.gildedrose.items.AgedBrie
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
-import com.gildedrose.AgedBrie
 
 class AgedBrieTest extends AnyFlatSpec with Matchers {
   "Aged Brie" should "not increase quality beyond 50" in {

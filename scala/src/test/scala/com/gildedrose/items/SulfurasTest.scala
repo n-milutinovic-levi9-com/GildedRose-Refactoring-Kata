@@ -1,6 +1,6 @@
-package com.gildedrose.item
+package com.gildedrose.items
 
-import com.gildedrose.Sulfuras
+import com.gildedrose.items.Sulfuras
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
