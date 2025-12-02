@@ -10,7 +10,7 @@ object ConverterRegistry {
   /** Function used to match the name to the converter */
   type Matcher = String => Boolean
   /** Function used to convert `Item` to `InternalItem` */
-  type Converter = Item => InternalItem
+  type Converter = Item => InternalItem[?]
 
   /** The default converter registry, holding all known types of items. */
   val default: ConverterRegistry = ConverterRegistry(MiscellaneousItem.CONVERTER)
@@ -79,7 +79,7 @@ class ConverterRegistry(private val defaultConverter: ConverterRegistry.Converte
    * @param item DTO (public API) item to convert.
    * @return internal item converted from DTO form.
    */
-  def convert(item: Item): InternalItem = {
+  def convert(item: Item): InternalItem[?] = {
     registry.keySet
       .find(_.apply(item.name))
       .map(registry(_))

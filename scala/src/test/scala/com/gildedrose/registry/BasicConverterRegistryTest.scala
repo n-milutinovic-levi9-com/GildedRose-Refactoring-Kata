@@ -11,25 +11,27 @@ class BasicConverterRegistryTest extends AnyFlatSpec with Matchers {
   private val testName = "Test item"
   private val testSellIn = 10
   private val testQuality = 20
-  private val defaultConverter = (item: Item) => MiscellaneousItem(item.name, item.sellIn, item.quality)
+  //private val defaultConverter = (item: Item) => MiscellaneousItem(item.name, item.sellIn, item.quality)
 
   "Empty registry" should "have the default entry" in {
-    val registry = ConverterRegistry(defaultConverter)
+    val registry = ConverterRegistry(MiscellaneousItem.CONVERTER)
 
     val myItem = registry.convert(Item(testName, testSellIn, testQuality))
-    myItem shouldBe an [InternalItem]
+    myItem shouldBe an [MiscellaneousItem]
     myItem.name should be (testName)
     myItem.sellIn should be (testSellIn)
     myItem.quality should be (testQuality)
   }
 
   "Adding a converter" should "have precedence over default converter" in {
-    class TestItem extends InternalItem(testName, testSellIn, testQuality) {
-      override def update(): InternalItem = TestItem()
+    class TestItem extends InternalItem[TestItem](testName, testSellIn, testQuality) {
+      override def update(): TestItem = TestItem()
+
+      override protected def build(newSellIn: Int, newQuality: Int): TestItem = TestItem()
     }
     val matcher = (name: String) => name == testName
     val converter = (item: Item) => TestItem()
-    val registry = ConverterRegistry(defaultConverter)
+    val registry = ConverterRegistry(MiscellaneousItem.CONVERTER)
     registry.register(matcher, converter)
 
     val myItem = registry.convert(Item(testName, testSellIn, testQuality))

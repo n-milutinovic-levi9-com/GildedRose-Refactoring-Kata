@@ -18,8 +18,8 @@ object AgedBrie {
  * @param sellIn  how many days from now this item reaches full maturity.
  * @param quality perceived quality of an item.
  */
-class AgedBrie(sellIn: Int, quality: Int) extends InternalItem(AgedBrie.NAME, sellIn, quality) {
-  override def update(): InternalItem = {
+class AgedBrie(sellIn: Int, quality: Int) extends InternalItem[AgedBrie](AgedBrie.NAME, sellIn, quality) {
+  override def update(): AgedBrie = {
     var newQuality = quality
     var newSellIn = sellIn
 
@@ -35,5 +35,7 @@ class AgedBrie(sellIn: Int, quality: Int) extends InternalItem(AgedBrie.NAME, se
     }
     AgedBrie(newSellIn, newQuality)
   }
+
+  override protected def build(newSellIn: Int, newQuality: Int): AgedBrie = AgedBrie(newSellIn, newQuality)
 }
 

@@ -41,8 +41,10 @@ class DefaultConverterRegistryTest extends AnyFlatSpec with Matchers {
 
   it should "accept client's converter" in {
     val name = "Test item"
-    class TestItem(sellIn: Int, quality: Int) extends InternalItem(name, sellIn, quality) {
-      override def update(): InternalItem = this
+    class TestItem(sellIn: Int, quality: Int) extends InternalItem[TestItem](name, sellIn, quality) {
+      override def update(): TestItem = this
+
+      override protected def build(newSellIn: Int, newQuality: Int): TestItem = TestItem(newQuality, newQuality)
     }
     ConverterRegistry.default.register(_ == name, (item: Item) => TestItem(item.sellIn, item.quality))
 

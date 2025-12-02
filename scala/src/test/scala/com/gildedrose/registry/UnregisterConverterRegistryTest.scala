@@ -12,8 +12,10 @@ class UnregisterConverterRegistryTest extends AnyFlatSpec with Matchers with Bef
   private val testSellIn = 20
   private val testQuality = 30
 
-  private class TestItem(sellIn: Int, quality: Int) extends InternalItem(testName, sellIn, quality) {
-    override def update(): InternalItem = this
+  private class TestItem(sellIn: Int, quality: Int) extends InternalItem[TestItem](testName, sellIn, quality) {
+    override def update(): TestItem = this
+
+    override protected def build(newSellIn: Int, newQuality: Int): TestItem = TestItem(newSellIn, newQuality)
   }
 
   private var registry: ConverterRegistry = uninitialized

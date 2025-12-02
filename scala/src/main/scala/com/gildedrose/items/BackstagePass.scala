@@ -22,8 +22,8 @@ object BackstagePass {
  * @param sellIn  how many days from now this item should be sold or is valid.
  * @param quality perceived quality of an item.
  */
-class BackstagePass(sellIn: Int, quality: Int) extends InternalItem(BackstagePass.NAME, sellIn, quality) {
-  override def update(): InternalItem = {
+class BackstagePass(sellIn: Int, quality: Int) extends InternalItem[BackstagePass](BackstagePass.NAME, sellIn, quality) {
+  override def update(): BackstagePass = {
     var newQuality = quality
     var newSellIn = sellIn
 
@@ -49,4 +49,6 @@ class BackstagePass(sellIn: Int, quality: Int) extends InternalItem(BackstagePas
     }
     BackstagePass(newSellIn, newQuality)
   }
+
+  override protected def build(newSellIn: Int, newQuality: Int): BackstagePass = BackstagePass(newSellIn, newQuality)
 }

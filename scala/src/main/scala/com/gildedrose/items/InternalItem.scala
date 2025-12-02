@@ -9,9 +9,21 @@ package com.gildedrose.items
  * @param sellIn  how many days from now this item should be sold or is valid.
  * @param quality perceived quality of an item.
  */
-abstract case class InternalItem(name: String, sellIn: Int, quality: Int) {
+abstract case class InternalItem[T <: InternalItem[T]](name: String, sellIn: Int, quality: Int) {
   /** Update item properties after a day */
-  def update(): InternalItem
+  def update(): T
+
+  /** New instance builder.
+   *
+   * This method is used to generate new instances of the concrete class, based on its
+   * internal state and new values for sell-in and quality. This method will support
+   * updaters on the base class `InternalItem`.
+   *
+   * @param newSellIn new sell-in value.
+   * @param newQuality new quality value.
+   * @return
+   */
+  protected def build(newSellIn: Int, newQuality: Int): T
 }
 
 /** Utility object for converting Items to and from internal form. */

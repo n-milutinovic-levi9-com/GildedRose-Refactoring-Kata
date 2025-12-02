@@ -19,8 +19,8 @@ object MiscellaneousItem {
  * @param sellIn how many days from now this item should be sold or is valid.
  * @param quality perceived quality of an item.
  */
-class MiscellaneousItem(name: String, sellIn: Int, quality: Int) extends InternalItem(name, sellIn, quality) {
-  override def update(): InternalItem = {
+class MiscellaneousItem(name: String, sellIn: Int, quality: Int) extends InternalItem[MiscellaneousItem](name, sellIn, quality) {
+  override def update(): MiscellaneousItem = {
     var newQuality = quality
     var newSellIn = sellIn
 
@@ -37,4 +37,6 @@ class MiscellaneousItem(name: String, sellIn: Int, quality: Int) extends Interna
     }
     MiscellaneousItem(name, newSellIn, newQuality)
   }
+
+  override protected def build(newSellIn: Int, newQuality: Int): MiscellaneousItem = MiscellaneousItem(name, newSellIn, newQuality)
 }

@@ -16,10 +16,12 @@ object Sulfuras {
  * @param sellIn  has no semantics in the context of this item.
  * @param quality perceived quality of an item.
  */
-class Sulfuras(sellIn: Int, quality: Int) extends InternalItem(Sulfuras.NAME, sellIn, quality) {
+class Sulfuras(sellIn: Int, quality: Int) extends InternalItem[Sulfuras](Sulfuras.NAME, sellIn, quality) {
   /** Sulfuras doesn't change over time.
    *
    * @return same unchanged instance.
    */
-  override def update(): InternalItem = this
+  override def update(): Sulfuras = this
+
+  override protected def build(newSellIn: Int, newQuality: Int): Sulfuras = Sulfuras(newSellIn, newQuality)
 }
