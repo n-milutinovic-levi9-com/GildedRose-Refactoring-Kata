@@ -1,8 +1,7 @@
 package com.gildedrose.registry
 
-import com.gildedrose.items.{AgedBrie, BackstagePass, InternalItem, Sulfuras}
+import com.gildedrose.items.{AgedBrie, BackstagePass, ConjuredItem, InternalItem, MiscellaneousItem, Sulfuras}
 import com.gildedrose.Item
-import com.gildedrose.items.MiscellaneousItem
 
 import scala.collection.mutable.Seq
 
@@ -17,6 +16,7 @@ object ConverterRegistry {
     .register(AgedBrie.MATCHER, AgedBrie.CONVERTER)
     .register(BackstagePass.MATCHER, BackstagePass.CONVERTER)
     .register(Sulfuras.MATCHER, Sulfuras.CONVERTER)
+    .register(ConjuredItem.MATCHER, ConjuredItem.CONVERTER)
 }
 
 /** Converter registry for Item -> InternalItem
